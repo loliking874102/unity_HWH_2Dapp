@@ -14,5 +14,41 @@ public class Player : MonoBehaviour
     public string cName = "貓咪";
     [Header("金幣"),Tooltip("獲得金幣數量")]
     public int coin = 0;
-    
+    [Header("虛擬搖桿")]
+    public FixedJoystick joystick;
+    /// <summary>
+    /// 移動
+    /// </summary>
+    private void Move()
+    {
+        print("移動");
+        //獲取虛擬搖桿水平Horizontal
+        float h = joystick.Horizontal;
+        print("水平 =" + h);
+        //獲取虛擬搖桿垂直Vertical
+        float v = joystick.Vertical;
+        print("垂直 =" + v);
+    }
+    private void Att()
+    {
+
+    }
+    private void Hit()
+    {
+
+    }
+    private void Dead()
+    {
+
+    }
+    private void Start()
+    {
+          
+    }
+    private void Update()
+    {
+        //呼叫方法
+        //名稱();
+        Move();
+    }
 }
