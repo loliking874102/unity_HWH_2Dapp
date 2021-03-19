@@ -16,6 +16,10 @@ public class Player : MonoBehaviour
     public int coin = 0;
     [Header("虛擬搖桿")]
     public FixedJoystick joystick;
+    [Header("變形元件")]
+    public Transform tra;
+    [Header("動畫元件")]
+    public Animator ani;
     /// <summary>
     /// 移動
     /// </summary>
@@ -28,6 +32,10 @@ public class Player : MonoBehaviour
         //獲取虛擬搖桿垂直Vertical
         float v = joystick.Vertical;
         print("垂直 =" + v);
+        //變形元件.位移(h水平*速度*一楨,v垂直*速度*一楨,0)
+        transform.Translate(h * speed * Time.deltaTime,v * speed * Time.deltaTime ,0);
+        ani.SetFloat("水平", h);
+        ani.SetFloat("垂直", v);
     }
     private void Att()
     {
