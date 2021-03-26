@@ -20,6 +20,16 @@ public class Player : MonoBehaviour
     public Transform tra;
     [Header("動畫元件")]
     public Animator ani;
+    [Header("偵測範圍")]
+    public float rangeAttack = 2.5f;
+    //事件:繪製圖示
+    private void OnDrawGizmos()
+    {
+        //指定圖示顏色
+        Gizmos.color = new Color(1, 0, 0, 0.2f);
+        //繪製圖示 球體(中心點,半徑)
+        Gizmos.DrawSphere(transform.position, rangeAttack);
+    }
     /// <summary>
     /// 移動
     /// </summary>

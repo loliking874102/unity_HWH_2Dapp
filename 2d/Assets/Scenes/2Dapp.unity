@@ -2186,6 +2186,7 @@ MonoBehaviour:
   speed: 1.5
   LimitY: {x: -5, y: 5}
   LimitX: {x: -5, y: 5}
+  player: {fileID: 617258730}
 --- !u!1 &617258727
 GameObject:
   m_ObjectHideFlags: 0
@@ -2312,6 +2313,7 @@ MonoBehaviour:
   joystick: {fileID: 1208162282}
   tra: {fileID: 617258730}
   ani: {fileID: 617258728}
+  rangeAttack: 1.3
 --- !u!50 &617258732
 Rigidbody2D:
   serializedVersion: 4
