@@ -17,7 +17,7 @@ public class CameraCont : MonoBehaviour
     {
         Track();
     }
-    //追蹤
+    
     private void Track()
     {
         Vector3 posCam = transform.position;   //取得攝影機座標
@@ -27,7 +27,7 @@ public class CameraCont : MonoBehaviour
         posCam.z = -10;
 
         posCam.x = Mathf.Clamp(posCam.x, limitX.x, limitX.y);
-        posCam.y = Mathf.Clamp(posCam.y, limitY.y, limitY.y);
+        posCam.y = Mathf.Clamp(posCam.y, limitY.x, limitY.y);
 
         transform.position = posCam; //更新攝影機座標
     }

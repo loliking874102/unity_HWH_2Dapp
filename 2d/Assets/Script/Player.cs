@@ -47,9 +47,11 @@ public class Player : MonoBehaviour
         ani.SetFloat("水平", h);
         ani.SetFloat("垂直", v);
     }
-    private void Att()
+    public void Att()
     {
+        RaycastHit2D hit = Physics2D.CircleCast(transform.position, rangeAttack, -transform.up,  0,1 << 8);
 
+        if (hit.collider.tag == "道具") Destroy(hit.collider.gameObject);
     }
     private void Hit()
     {
