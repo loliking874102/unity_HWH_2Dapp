@@ -22,6 +22,10 @@ public class Player : MonoBehaviour
     public Animator ani;
     [Header("偵測範圍")]
     public float rangeAttack = 2.5f;
+    [Header("音效來源")]
+    public AudioSource aud;
+    [Header("攻擊音效")]
+    public AudioClip soundAttack;
     //事件:繪製圖示
     private void OnDrawGizmos()
     {
@@ -49,6 +53,7 @@ public class Player : MonoBehaviour
     }
     public void Att()
     {
+        aud.PlayOneShot(soundAttack, 0.5f);
         RaycastHit2D hit = Physics2D.CircleCast(transform.position, rangeAttack, -transform.up,  0,1 << 8);
 
         if (hit.collider.tag == "道具") Destroy(hit.collider.gameObject);
