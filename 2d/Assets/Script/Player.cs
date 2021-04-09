@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-
+using UnityEngine.UI;
 public class Player : MonoBehaviour
 {
     [Header("等級"),Tooltip("調整角色等級")]
@@ -75,5 +75,19 @@ public class Player : MonoBehaviour
         //呼叫方法
         //名稱();
         Move();
+    }
+    //觸發事件:進入 兩個物件其中有一個勾選Is trigger
+    [Header("吃金幣音效")]
+    public AudioClip eatsound;
+    [Header("金幣數量")]
+    public Text GetCoin ;
+    private int Coin;
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Coin++;
+        print(collision.gameObject);
+        aud.PlayOneShot(eatsound);
+        Destroy(collision.gameObject);
+        GetCoin.text = "金幣:" + Coin;
     }
 }
