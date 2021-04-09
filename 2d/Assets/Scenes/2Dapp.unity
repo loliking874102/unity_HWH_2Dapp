@@ -2126,7 +2126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db5bda1585997644c937c15f47087cec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prop: {fileID: 0}
+  prop: {fileID: 3061515892155234316, guid: a6cbdd3fde2d9384d9ec76cff21a1f3e, type: 3}
   cent: 0.7
 --- !u!1 &572434956
 GameObject:

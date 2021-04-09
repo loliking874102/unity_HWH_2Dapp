@@ -55,8 +55,8 @@ public class Player : MonoBehaviour
     {
         aud.PlayOneShot(soundAttack, 0.5f);
         RaycastHit2D hit = Physics2D.CircleCast(transform.position, rangeAttack, -transform.up,  0,1 << 8);
-
-        if (hit && hit.collider.tag == "道具") Destroy(hit.collider.gameObject);
+        //如果 碰到物件.碰撞.tag為道具 碰到物件.碰撞.取得數值<數值名稱>.方法();
+        if (hit && hit.collider.tag == "道具") hit.collider.GetComponent<Item>().Dropprop();
     }
     private void Hit()
     {
