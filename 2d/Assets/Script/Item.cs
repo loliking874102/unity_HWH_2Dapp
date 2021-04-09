@@ -15,6 +15,14 @@ public class Item : MonoBehaviour
     {
         //隨機.範圍(最小值,最大值)
         float f = Random.Range(0f, 1f);
-        print("隨機值 =" + f);
+        //print("隨機值 =" + f);
+        //如果f小於cent
+        if (f <= cent)
+        {
+            //創造(prop,座標,角度)
+            Instantiate(prop,transform.position,transform.rotation);
+        }
+        //刪除物件
+        Destroy(gameObject);
     }
 }
