@@ -6,7 +6,18 @@ public class Ai : MonoBehaviour
     [Header("攻擊範圍"), Range(0, 5)]
     public float rangeAtt = 1;
     private Transform player;
+    [Header("移動速度"),Range(0, 10)]
     public float speed = 5;
+    [Header("攻擊特效")]
+    public ParticleSystem psparticle;
+    [Header("攻擊冷卻時間"), Range(0, 10)]
+    public float attTime;
+    [Header("攻擊傷害"), Range(0, 100)]
+    public float attackdam;
+    /// <summary>
+    /// 計時器
+    /// </summary>
+    private float timer;
     private void Start()
     {
         //搜尋玩家座標並取得物件(物件名稱).變形
@@ -36,11 +47,29 @@ public class Ai : MonoBehaviour
     {
                     //距離=三維向量的距離(a,b)
         float tra = Vector3.Distance(transform.position, player.position);
-        //如果(距離小於等於追蹤範圍)才開始追蹤
-        if(tra <= rangeTrack)
+        //如果(距離小於等於追蹤範圍)開始攻擊
+        //否則(距離小於等於追蹤範圍)才開始追蹤
+        if(tra <= rangeAtt)
+        {
+            Attack();
+        }
+        else if(tra <= rangeTrack)
         {
             //物件座標 更新為 三維向量 的往前移動 (物件座標,目標座標,速度*一禎的時間)
             transform.position=Vector3.MoveTowards(transform.position,player.position, speed*Time.deltaTime);
+        }
+    }
+    /// <summary>
+    /// 攻擊
+    /// </summary>
+    private void Attack()
+    {
+        timer += Time.deltaTime;  // 累加時間
+        //如果時間大於等於攻擊冷卻時間 就攻擊
+        if(timer >= attTime)
+        {
+            timer = 0;    //計時器歸零
+            psparticle.Play();   //播放攻擊特效
         }
     }
 }
