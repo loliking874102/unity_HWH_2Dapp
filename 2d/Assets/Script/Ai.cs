@@ -70,7 +70,8 @@ public class Ai : MonoBehaviour
         {
             timer = 0;    //計時器歸零
             psparticle.Play();   //播放攻擊特效
-            
+            Collider2D hit = Physics2D.OverlapCircle(transform.position, rangeAtt);
+            hit.GetComponent<Player>().Hit(attackdam);
         }
     }
 }

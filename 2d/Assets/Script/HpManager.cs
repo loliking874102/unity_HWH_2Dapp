@@ -6,6 +6,8 @@ public class HpManager : MonoBehaviour
 {
     [Header("血條")]
     public Image Hpimage ;
+    [Header("傷害數值")]
+    public RectTransform rectDamage;
     /// <summary>
     /// 血條與血量MAX更新血條
     /// </summary>
@@ -15,5 +17,9 @@ public class HpManager : MonoBehaviour
     {
         //血量.填滿數值 = 當前血量/血量最大值
         Hpimage.fillAmount = hp / hpMax;    
+    }
+    public IEnumerator ShowDamage()
+    {
+
     }
 }
