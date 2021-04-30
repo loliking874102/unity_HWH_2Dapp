@@ -70,6 +70,7 @@ public class Ai : MonoBehaviour
         {
             timer = 0;    //計時器歸零
             psparticle.Play();   //播放攻擊特效
+            
         }
     }
 }
