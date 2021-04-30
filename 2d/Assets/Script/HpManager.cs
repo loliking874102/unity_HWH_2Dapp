@@ -20,6 +20,14 @@ public class HpManager : MonoBehaviour
     }
     public IEnumerator ShowDamage()
     {
-
+        RectTransform rect = Instantiate(rectDamage, transform);    //生成傷害在血條系統裡
+        rect.anchoredPosition = new Vector2(5, 275);    //指定座標
+        float y = rect.anchoredPosition.y;
+        while (y < 400)
+        {
+            y += 20;
+            rect.anchoredPosition = new Vector2(5, y);
+            yield return new WaitForSeconds(0.02f);
+        }
     }
 }
