@@ -19,8 +19,8 @@ public class Ai : MonoBehaviour
     [Header("血條系統")]
     public HpManager hpManager;
     private float hpMax;
-    [Header("死亡"), Tooltip("角色是否死亡")]
-    public bool Isdead = false;
+  
+    private bool Isdead = false;
     /// <summary>
     /// 計時器
     /// </summary>

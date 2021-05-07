@@ -9,8 +9,6 @@ public class Player : MonoBehaviour
     public float speed = 10.5f;
     [Header("攻擊"), Tooltip("調整角色攻擊傷害")]
     public float attack = 10;
-    [Header("死亡"),Tooltip("角色是否死亡")]
-    public bool Isdead = false;
     [Header("名子"),Tooltip("角色名稱")]
     public string cName = "貓咪";
     [Header("金幣"),Tooltip("獲得金幣數量")]
@@ -31,9 +29,13 @@ public class Player : MonoBehaviour
     public float hp = 200;
     [Header("血條系統")]
     public HpManager hpManager; 
-    private float hpMax;
     [Header("攻擊傷害"), Range(0, 100)]
     public float attackdam;
+    [Header("等級文字")]
+    public Text textLv;
+
+    private float hpMax;
+    private bool Isdead = false;
     //事件:繪製圖示
     private void OnDrawGizmos()
     {
