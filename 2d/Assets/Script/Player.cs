@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 public class Player : MonoBehaviour
 {
     [Header("等級"),Tooltip("調整角色等級")]
@@ -31,6 +32,8 @@ public class Player : MonoBehaviour
     [Header("血條系統")]
     public HpManager hpManager; 
     private float hpMax;
+    [Header("攻擊傷害"), Range(0, 100)]
+    public float attackdam;
     //事件:繪製圖示
     private void OnDrawGizmos()
     {
@@ -44,6 +47,7 @@ public class Player : MonoBehaviour
     /// </summary>
     private void Move()
     {
+        if (Isdead) return;
         print("移動");
         //獲取虛擬搖桿水平Horizontal
         float h = joystick.Horizontal;
@@ -58,10 +62,12 @@ public class Player : MonoBehaviour
     }
     public void Att()
     {
+        if (Isdead) return;
         aud.PlayOneShot(soundAttack, 0.5f);
         RaycastHit2D hit = Physics2D.CircleCast(transform.position, rangeAttack, -transform.up,  0,1 << 8);
         //如果 碰到物件.碰撞.tag為道具 碰到物件.碰撞.取得數值<數值名稱>.方法();
         if (hit && hit.collider.tag == "道具") hit.collider.GetComponent<Item>().Dropprop();
+        if (hit && hit.collider.tag == "敵人") hit.collider.GetComponent<Ai>().Hit(attack);
     }
     /// <summary>
     /// 被傷害系統
@@ -71,11 +77,18 @@ public class Player : MonoBehaviour
     {
         hp -= damage;                             //扣除傷害
         hpManager.UpdateHPdata(hp, hpMax);        //更新血條
-        StartCoroutine(hpManager.ShowDamage());
+        StartCoroutine(hpManager.ShowDamage(damage));
+        if (hp <= 0) Dead();
     }
     private void Dead()
     {
-
+        hp = 0;
+        Isdead = true;
+        Invoke("Replay", 2);
+    }
+    private void Replay()
+    {
+        SceneManager.LoadScene("2Dapp");
     }
     private void Start()
     {

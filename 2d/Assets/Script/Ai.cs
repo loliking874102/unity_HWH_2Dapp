@@ -14,12 +14,20 @@ public class Ai : MonoBehaviour
     public float attTime;
     [Header("攻擊傷害"), Range(0, 100)]
     public float attackdam;
+    [Header("血量")]
+    public float hp = 200;
+    [Header("血條系統")]
+    public HpManager hpManager;
+    private float hpMax;
+    [Header("死亡"), Tooltip("角色是否死亡")]
+    public bool Isdead = false;
     /// <summary>
     /// 計時器
     /// </summary>
     private float timer;
     private void Start()
     {
+        hpMax = hp;
         //搜尋玩家座標並取得物件(物件名稱).變形
         player = GameObject.Find("主角").transform;
     }
@@ -45,6 +53,7 @@ public class Ai : MonoBehaviour
     /// </summary>
     private void Track()
     {
+        if (Isdead) return;
                     //距離=三維向量的距離(a,b)
         float tra = Vector3.Distance(transform.position, player.position);
         //如果(距離小於等於追蹤範圍)開始攻擊
@@ -70,8 +79,25 @@ public class Ai : MonoBehaviour
         {
             timer = 0;    //計時器歸零
             psparticle.Play();   //播放攻擊特效
-            Collider2D hit = Physics2D.OverlapCircle(transform.position, rangeAtt);
+            Collider2D hit = Physics2D.OverlapCircle(transform.position, rangeAtt, 1 << 9 );
             hit.GetComponent<Player>().Hit(attackdam);
         }
+    }
+    /// <summary>
+    /// 被傷害系統
+    /// </summary>
+    /// <param name="damage">傷害</param>
+    public void Hit(float damage)
+    {
+        hp -= damage;                             //扣除傷害
+        hpManager.UpdateHPdata(hp, hpMax);        //更新血條
+        StartCoroutine(hpManager.ShowDamage(damage));
+        if (hp <= 0) Dead();
+    }
+    private void Dead()
+    {
+        hp = 0;
+        Isdead = true;
+        Destroy(gameObject,1.5f);
     }
 }
