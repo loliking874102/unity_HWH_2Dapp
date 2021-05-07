@@ -19,8 +19,10 @@ public class Ai : MonoBehaviour
     [Header("血條系統")]
     public HpManager hpManager;
     private float hpMax;
-  
+    [Header("經驗值"), Range(0, 200)]
+    public float exp = 50;
     private bool Isdead = false;
+    private Player _player;
     /// <summary>
     /// 計時器
     /// </summary>
@@ -30,6 +32,7 @@ public class Ai : MonoBehaviour
         hpMax = hp;
         //搜尋玩家座標並取得物件(物件名稱).變形
         player = GameObject.Find("主角").transform;
+        _player = GetComponent<Player>();
     }
     
     //繪製圖示事件:輔助開發
