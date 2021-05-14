@@ -5,7 +5,7 @@ public class Player : MonoBehaviour
 {
     #region 
     [Header("等級"),Tooltip("調整角色等級")]
-    public int lvl=1;
+    public int lv=1;
     [Header("速度"),Range(0,10),Tooltip("調整角色速度")]
     public float speed = 10.5f;
     [Header("攻擊"), Tooltip("調整角色攻擊傷害")]
@@ -109,6 +109,14 @@ public class Player : MonoBehaviour
         exp += getExp;
         print("經驗值:" + exp);
         imgExp.fillAmount = exp / expNeed;
+        //升級
+        if(exp >=100)
+        {
+            lv++;                       //升級數值
+            textLv.text = "Lv" + lv;        //升級
+            exp -= expNeed;         //將多餘的經驗補回來
+            imgExp.fillAmount = exp / expNeed; //介面更新
+        }
     }
     #endregion
 
