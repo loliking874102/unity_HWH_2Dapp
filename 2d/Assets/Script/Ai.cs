@@ -32,7 +32,7 @@ public class Ai : MonoBehaviour
         hpMax = hp;
         //搜尋玩家座標並取得物件(物件名稱).變形
         player = GameObject.Find("主角").transform;
-        _player = GetComponent<Player>();
+        _player = player.GetComponent<Player>();    //接收主角數值
     }
     
     //繪製圖示事件:輔助開發
@@ -99,8 +99,10 @@ public class Ai : MonoBehaviour
     }
     private void Dead()
     {
+        if (Isdead) return;
         hp = 0;
         Isdead = true;
         Destroy(gameObject,1.5f);
+        _player.Exp(exp);
     }
 }

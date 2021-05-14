@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 public class Player : MonoBehaviour
 {
+    #region 
     [Header("等級"),Tooltip("調整角色等級")]
     public int lvl=1;
     [Header("速度"),Range(0,10),Tooltip("調整角色速度")]
@@ -33,10 +34,12 @@ public class Player : MonoBehaviour
     public float attackdam;
     [Header("等級文字")]
     public Text textLv;
-
+    [Header("經驗值")]
     private float hpMax;
     private bool Isdead = false;
+    #endregion
     //事件:繪製圖示
+    #region 方法
     private void OnDrawGizmos()
     {
         //指定圖示顏色
@@ -50,13 +53,13 @@ public class Player : MonoBehaviour
     private void Move()
     {
         if (Isdead) return;
-        print("移動");
+       // print("移動");
         //獲取虛擬搖桿水平Horizontal
         float h = joystick.Horizontal;
-        print("水平 =" + h);
+       // print("水平 =" + h);
         //獲取虛擬搖桿垂直Vertical
         float v = joystick.Vertical;
-        print("垂直 =" + v);
+      //  print("垂直 =" + v);
         //變形元件.位移(h水平*速度*一楨,v垂直*速度*一楨,0)
         transform.Translate(h * speed * Time.deltaTime,v * speed * Time.deltaTime ,0);
         ani.SetFloat("水平", h);
@@ -92,6 +95,24 @@ public class Player : MonoBehaviour
     {
         SceneManager.LoadScene("2Dapp");
     }
+
+    private float exp;
+    private float expNeed = 100 ;   //需要多少才會升級
+    [Header("經驗值條")]
+    public Image imgExp;
+    /// <summary>
+    /// 經驗值控制
+    /// </summary>
+    /// <param name="getExp">接收到經驗值</param>
+    public void Exp(float getExp)
+    {
+        exp += getExp;
+        print("經驗值:" + exp);
+        imgExp.fillAmount = exp / expNeed;
+    }
+    #endregion
+
+    #region
     private void Start()
     {
         hpMax = hp;    //更新血量最大值
@@ -116,4 +137,5 @@ public class Player : MonoBehaviour
         Destroy(collision.gameObject);
         GetCoin.text = "金幣:" + Coin;
     }
+    #endregion
 }
