@@ -2178,6 +2178,7 @@ MonoBehaviour:
   attackdam: 0
   textLv: {fileID: 1904910539}
   imgExp: {fileID: 1617987325}
+  expData: {fileID: 11400000, guid: d82353bf10981ad458df245e28c47466, type: 2}
   eatsound: {fileID: 8300000, guid: 9b68cc747a851ab44b931d37432ed285, type: 3}
   GetCoin: {fileID: 1022600002}
 --- !u!50 &617258732

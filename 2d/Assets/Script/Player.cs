@@ -118,12 +118,20 @@ public class Player : MonoBehaviour
             imgExp.fillAmount = exp / expNeed; //介面更新
         }
     }
+    [Header("經驗值資料")]
+    public Expdata expData;
     #endregion
 
     #region
     private void Start()
     {
         hpMax = hp;    //更新血量最大值
+        for (int i = 0; i < 99; i++)
+        {
+            //經驗值資料的經驗值陣列[編號] = 公式
+            //公式:(編號+1)*100 每等加100
+            expData.exp[i] = (i + 1) * 100;  
+        }
     }
     private void Update()
     {
