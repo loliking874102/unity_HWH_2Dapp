@@ -122,6 +122,7 @@ public class Player : MonoBehaviour
             textLv.text = "Lv" + lv;        //升級
             exp -= expNeed;         //將多餘的經驗補回來
             imgExp.fillAmount = exp / expNeed; //介面更新
+            expNeed = expData.exp[lv - 1];
         }
     }
     [Header("經驗值資料")]
