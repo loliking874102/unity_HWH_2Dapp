@@ -116,14 +116,27 @@ public class Player : MonoBehaviour
         //語法:
         //while (布林值) {布林值為true時持續執行}
         //if(布林值){布林值為true時執行一次}
-        while (exp >=100)
+        while (exp >=expNeed)
         {
             lv++;                       //升級數值
             textLv.text = "Lv" + lv;        //升級
             exp -= expNeed;         //將多餘的經驗補回來
             imgExp.fillAmount = exp / expNeed; //介面更新
             expNeed = expData.exp[lv - 1];
+            Levelup();             //呼叫升級方法
         }
+    }
+    /// <summary>
+    /// 升級後的數據更新，攻擊力與血量，升級後恢復血量
+    /// </summary>
+    private void Levelup()
+    {
+        //攻擊力每一等提升
+        attack = 50 + (lv - 1) * 20;
+        //血量每一等提升
+        hpMax = 200 + (lv - 1) * 100;
+        hp = hpMax;  //恢復血量全滿
+        hpManager.UpdateHPdata(hp, hpMax);    //更新血條
     }
     [Header("經驗值資料")]
     public Expdata expData;
