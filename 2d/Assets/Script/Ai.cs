@@ -19,7 +19,7 @@ public class Ai : MonoBehaviour
     [Header("血條系統")]
     public HpManager hpManager;
     private float hpMax;
-    [Header("經驗值"), Range(0, 200)]
+    [Header("經驗值"), Range(0, 100000)]
     public float exp = 50;
     private bool Isdead = false;
     private Player _player;

@@ -106,11 +106,17 @@ public class Player : MonoBehaviour
     /// <param name="getExp">接收到經驗值</param>
     public void Exp(float getExp)
     {
+        //取得目前等級ㄒ要的經驗需求
+        expNeed = expData.exp[lv - 1];    //要取得的資料為等級-1
         exp += getExp;
         print("經驗值:" + exp);
         imgExp.fillAmount = exp / expNeed;
         //升級
-        if(exp >=100)
+        //迴圈 while
+        //語法:
+        //while (布林值) {布林值為true時持續執行}
+        //if(布林值){布林值為true時執行一次}
+        while (exp >=100)
         {
             lv++;                       //升級數值
             textLv.text = "Lv" + lv;        //升級
