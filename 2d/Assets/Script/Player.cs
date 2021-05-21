@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 public class Player : MonoBehaviour
 {
-    #region 
+    #region 數值 
     [Header("等級"),Tooltip("調整角色等級")]
     public int lv=1;
     [Header("速度"),Range(0,10),Tooltip("調整角色速度")]
@@ -37,6 +37,7 @@ public class Player : MonoBehaviour
     [Header("經驗值")]
     private float hpMax;
     private bool Isdead = false;
+    public float attackweapon;
     #endregion
     //事件:繪製圖示
     #region 方法
@@ -72,7 +73,9 @@ public class Player : MonoBehaviour
         RaycastHit2D hit = Physics2D.CircleCast(transform.position, rangeAttack, -transform.up,  0,1 << 8);
         //如果 碰到物件.碰撞.tag為道具 碰到物件.碰撞.取得數值<數值名稱>.方法();
         if (hit && hit.collider.tag == "道具") hit.collider.GetComponent<Item>().Dropprop();
-        if (hit && hit.collider.tag == "敵人") hit.collider.GetComponent<Ai>().Hit(attack);
+        if (hit && hit.collider.tag == "敵人") hit.collider.GetComponent<Ai>().Hit(attack + attackweapon);
+        //如果 打到的目標TAG為NPC 開啟OpenShop
+        if (hit && hit.collider.tag == "NPC") hit.collider.GetComponent<NPC>().OpenShop();
     }
     /// <summary>
     /// 被傷害系統
@@ -142,9 +145,11 @@ public class Player : MonoBehaviour
     public Expdata expData;
     #endregion
 
-    #region
+    #region 開始
     private void Start()
     {
+        coin = 10;
+        GetCoin.text = "金幣" + coin;
         hpMax = hp;    //更新血量最大值
         for (int i = 0; i < 99; i++)
         {
@@ -164,7 +169,7 @@ public class Player : MonoBehaviour
     public AudioClip eatsound;
     [Header("金幣數量")]
     public Text GetCoin ;
-    private int Coin;
+    public int Coin;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Coin++;
